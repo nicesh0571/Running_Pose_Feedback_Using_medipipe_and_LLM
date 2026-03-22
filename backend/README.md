@@ -8,7 +8,7 @@
 
 ```
 run/
-├── testrun/                  ← 백엔드 (이 폴더)
+├── backend/                  ← 백엔드 (이 폴더)
 │   ├── main.py               ← FastAPI 앱 + 전체 엔드포인트
 │   ├── models.py             ← SQLAlchemy DB 모델
 │   ├── schemas.py            ← Pydantic 요청/응답 스키마
@@ -25,7 +25,7 @@ run/
 │   │   └── pose/             ← 포즈 분석 중간 결과
 │   └── pose_landmarker_heavy.task  ← MediaPipe 모델 파일 (별도 다운로드)
 │
-├── running_pose 2/           ← 포즈 분석 모듈 (MediaPipe + Gemini)
+├── running_pose/             ← 포즈 분석 모듈 (MediaPipe + Gemini)
 │   └── pose_analyzer.py
 │
 └── video-editor/             ← 영상 편집 모듈 (AI 기반)
@@ -59,7 +59,7 @@ ollama serve  # 백그라운드 실행
 
 ### 1. 가상환경 생성 및 패키지 설치
 ```bash
-cd testrun
+cd backend
 python -m venv venv
 source venv/bin/activate        # macOS/Linux
 # venv\Scripts\activate         # Windows
@@ -85,7 +85,7 @@ SECRET_KEY=랜덤_시크릿_키_입력
 
 ### 3. 서버 실행
 ```bash
-cd testrun
+cd backend
 source venv/bin/activate
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
@@ -235,7 +235,7 @@ print('DB 초기화 완료')
 
 | 모듈 | 경로 | 역할 |
 |---|---|---|
-| `running_pose 2` | `../running_pose 2/pose_analyzer.py` | MediaPipe + Gemini 포즈 분석 |
+| `running_pose` | `../running_pose/pose_analyzer.py` | MediaPipe + Gemini 포즈 분석 |
 | `video-editor` | `../video-editor/src/` | AI 기반 영상 편집 |
 
 > 각 모듈이 없거나 import 실패 시 자동으로 폴백 동작합니다.
